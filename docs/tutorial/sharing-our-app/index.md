@@ -38,7 +38,7 @@ an example command that you will need to run to push to this repo.
 
 1. Login to the Docker Hub using the command `docker login -u YOUR-USER-NAME`.
 
-1. Use the `docker tag` command to give the `getting-started` image a new name. Be sure to swap out
+1. Use the `docker tag` command to give the `docker-tutorial` image a new name. Be sure to swap out
    `YOUR-USER-NAME` with your Docker ID.
 
     ```bash

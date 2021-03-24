@@ -3,10 +3,10 @@
 When you have built an image, it is good practice to scan it for security vulnerabilities using the `docker scan` command.
 Docker has partnered with [Snyk](http://snyk.io) to provide the vulnerability scanning service.
 
-For example, to scan the `getting-started` image you created earlier in the tutorial, you can just type
+For example, to scan the `docker-tutorial` image you created earlier in the tutorial, you can just type
 
 ```bash
-docker scan getting-started
+docker scan docker-tutorial
 ```
 
 The scan uses a constantly updated database of vulnerabilities, so the output you see will vary as new
@@ -47,11 +47,11 @@ to scan all newly pushed images automatically, and you can then see the results 
 Did you know that you can look at what makes up an image? Using the `docker image history`
 command, you can see the command that was used to create each layer within an image.
 
-1. Use the `docker image history` command to see the layers in the `getting-started` image you
+1. Use the `docker image history` command to see the layers in the `docker-tutorial` image you
    created earlier in the tutorial.
 
     ```bash
-    docker image history getting-started
+    docker image history docker-tutorial
     ```
 
     You should get output that looks something like this (dates/IDs may be different).
@@ -180,7 +180,7 @@ a change to the `package.json`. Make sense?
 
 1. Now, make a change to the `src/static/index.html` file (like change the `<title>` to say "The Awesome Todo App").
 
-1. Build the Docker image now using `docker build -t getting-started .` again. This time, your output should look a little different.
+1. Build the Docker image now using `docker build -t docker-tutorial .` again. This time, your output should look a little different.
 
     ```plaintext hl_lines="5 8 11"
     Sending build context to Docker daemon  219.1kB

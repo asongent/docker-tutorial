@@ -4,8 +4,8 @@ site_author: Docker
 # site_url: https://squidfunk.github.io/mkdocs-material/
 
 # Repository
-repo_name: docker/getting-started
-repo_url: https://github.com/docker/getting-started
+repo_name: asongent/docker-tutorial
+repo_url: https://github.com/asongent/docker-tutorial
 edit_uri: ""
 
 # Copyright
@@ -38,7 +38,7 @@ plugins:
 extra:
   social:
     - type: github-alt
-      link: https://github.com/docker/getting-started
+      link: https://github.com/asongent/docker-tutoria
 
 # Extensions
 markdown_extensions:
