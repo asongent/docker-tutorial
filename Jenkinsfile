@@ -10,11 +10,11 @@ pipeline {
             when {
                 branch 'main'
             }
-            sh "docker build -t asongent/docker-tutorial ."
+            sh "docker build -t jmugu/docker-tutorial ."
 
             steps {
                 withDockerRegistry([url: "", credentialsId: "dockerbuildbot-index.docker.io"]) {
-                    sh("docker push asongent/docker-tutorial")
+                    sh("docker push jmugu/docker-tutorial")
                 }
             }
         }
