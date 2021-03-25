@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('build and push') {
             when {
-                branch 'main'
+                branch 'master'
             }
             sh "docker build -t jmugu/dockerimage ."
 
