@@ -10,7 +10,7 @@ pipeline {
             when {
                 branch 'main'
             }
-            sh "docker build -t . jmugu/docker-tutorial"
+            sh "docker build -t ."
 
             steps {
                 withDockerRegistry([url: "", credentialsId: "dockerbuildbot-index.docker.io"]) {
