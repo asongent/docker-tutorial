@@ -1,4 +1,4 @@
-site_name: Getting Started
+site_name: Docker Tutorial
 site_description: Getting Started with Docker
 site_author: Docker
 # site_url: https://squidfunk.github.io/mkdocs-material/
@@ -38,7 +38,7 @@ plugins:
 extra:
   social:
     - type: github-alt
-      link: https://github.com/asongent/docker-tutoria
+      link: https://github.com/asongent/docker-tutorial
 
 # Extensions
 markdown_extensions:
