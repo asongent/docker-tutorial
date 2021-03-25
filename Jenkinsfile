@@ -1,6 +1,6 @@
 pipeline {
     options {
-        timeout(time: 1, unit: 'HOURS')
+        timeout(time: 1, unit: 'SECONDS')
     }
     agent {
         label 'ubuntu-1804 && amd64 && docker'
