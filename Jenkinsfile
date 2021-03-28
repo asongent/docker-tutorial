@@ -14,7 +14,7 @@ pipeline {
 
             steps {
                 withDockerRegistry([url: "", credentialsId: "dockerbuildbot-index.docker.io"]) {
-                    sh("docker push jmugu/docker-tutorial")
+                    sh("docker push jmugu/dockerapp")
                 }
             }
         }
