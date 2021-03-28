@@ -13,7 +13,7 @@ pipeline {
             sh "docker build -t ."
 
             steps {
-                withDockerRegistry([url: "", Docker-ID: "dockerbuildbot-index.docker.io"]) {
+                withDockerRegistry([url: "", credentialsId: "dockerbuildbot-index.docker.io"]) {
                     sh("docker push jmugu/docker-tutorial")
                 }
             }
