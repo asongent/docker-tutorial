@@ -10,5 +10,5 @@ fi
 
 docker buildx build \
       --platform linux/amd64,linux/arm64 \
-      -t jmugu/docker-tutorial:latest \
+      -t jmugu/dockerapp:latest \
       $( (( $WILL_PUSH == 1 )) && printf %s '--push' ) .
