@@ -10,7 +10,7 @@ pipeline {
             when {
                 branch 'main'
             }
-            sh "docker build /var/jenkins_home/workspace/dockerapp -t ."
+            sh "docker build -t dockerapp ."
 
             steps {
                 withDockerRegistry([url: "", credentialsId: "dockerbuildbot-index.docker.io"]) {
