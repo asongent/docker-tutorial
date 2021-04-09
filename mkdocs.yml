@@ -16,8 +16,8 @@ theme:
   name: material
   language: en
   palette:
-    primary: red
-    accent: red
+    primary: blue
+    accent: blue
     text: Roboto
     code: Roboto Mono
   favicon: assets/images/favicon.png
