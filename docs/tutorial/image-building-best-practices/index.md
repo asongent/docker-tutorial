@@ -275,6 +275,6 @@ build-time dependencies from runtime dependencies.
 
                                        Asong N.
                                   Cloud/DevOps Engineer
-                                   Kubernetes Wizard :)
-                                    Security Expert (:
+                                    Kubernetes Wizard
+                                     Security Expert 
                 
