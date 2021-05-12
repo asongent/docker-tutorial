@@ -357,3 +357,11 @@ using into the appropriate compose format.
 At this point, we're starting to wrap up the tutorial. However, there are a few best practices about
 image building we want to cover, as there is a big issue with the Dockerfile we've been using. So,
 let's take a look!
+
+      `Well, it nice lesrning about docker technology today`
+----
+     
+
+             I have completed the necessary update. please verify and let me know.
+
+                               Thanks
