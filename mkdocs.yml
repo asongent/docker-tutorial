@@ -9,7 +9,7 @@ repo_url: https://github.com/asongent/docker-tutorial
 edit_uri: ""
 
 # Copyright
-copyright: 'Copyright &copy; 2021 Docker'
+copyright: 'Copyright &copy; 2021 NWACUDO' #'Copyright &copy; 2021 Docker'
 
 # Configuration
 theme:
