@@ -1,6 +1,6 @@
-site_name: Docker Tutorial
-site_description: Getting Started with Docker
-site_author: Docker
+site_name: Nwangong Community #Docker Tutorial
+site_description: Get To Know Nwangong People And Tradition #Getting Started with Docker
+site_author: Nwangong Cultural And Development Association (NWACUDA) #Docker
 # site_url: https://squidfunk.github.io/mkdocs-material/
 
 # Repository
@@ -16,12 +16,12 @@ theme:
   name: material
   language: en
   palette:
-    primary: blue
-    accent: blue
+    primary: red #blue
+    accent: red #blue
     text: Roboto
     code: Roboto Mono
   favicon: assets/images/favicon.png
-  logo: 'images/docker-labs-logo.svg'
+  logo: 'images/atem_martin.svg' #'images/docker-labs-logo.svg'
 
 extra_css:
   - css/styles.css
