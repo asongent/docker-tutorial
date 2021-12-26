@@ -68,13 +68,13 @@ markdown_extensions:
 
 # Page tree
 nav:
-  - Getting Started: tutorial/index.md
-  - Our Application: tutorial/our-application/index.md
-  - Updating our App: tutorial/updating-our-app/index.md
-  - Sharing our App: tutorial/sharing-our-app/index.md
-  - Persisting our DB: tutorial/persisting-our-data/index.md
-  - Using Bind Mounts: tutorial/using-bind-mounts/index.md
-  - Multi-Container Apps: tutorial/multi-container-apps/index.md
-  - Using Docker Compose: tutorial/using-docker-compose/index.md
-  - Image Building Best Practices: tutorial/image-building-best-practices/index.md
-  - What Next?: tutorial/what-next/index.md
+  - Nwangong History: tutorial/index.md #Getting Started: tutorial/index.md
+  - Njilap Community: tutorial/our-application/index.md #Our Application: tutorial/our-application/index.md
+  - Lekeng Communtity: tutorial/updating-our-app/index.md #Updating our App: tutorial/updating-our-app/index.md
+  - Nwantseng Community: tutorial/sharing-our-app/index.md #Sharing our App: tutorial/sharing-our-app/index.md
+  - Ndencup Community: tutorial/persisting-our-data/index.md #Persisting our DB: tutorial/persisting-our-data/index.md
+  - Letia Community: tutorial/using-bind-mounts/index.md #Using Bind Mounts: tutorial/using-bind-mounts/index.md
+  - Projects: tutorial/multi-container-apps/index.md #Multi-Container Apps: tutorial/multi-container-apps/index.md
+  - Social Media Pages: tutorial/using-docker-compose/index.md  #Using Docker Compose: tutorial/using-docker-compose/index.md
+  - News Letter: tutorial/image-building-best-practices/index.md #Image Building Best Practices: tutorial/image-building-best-practices/index.md
+  - Nwangong Cultural And Development Association: tutorial/what-next/index.md #What Next?: tutorial/what-next/index.md
