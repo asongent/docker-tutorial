@@ -38,14 +38,6 @@ pipeline{
 	}
 
 
-    stage ('docker scan') {
-
-			steps {
-				sh 'docker scan jmugu/scan-test:latest'
-			}
-		}
-	}
-
 	post {
 		always {
 			sh 'docker logout'
