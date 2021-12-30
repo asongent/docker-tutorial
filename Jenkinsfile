@@ -10,11 +10,11 @@ pipeline {
             when {
                 branch 'main'
             }
-            sh "sudo docker build -t dockerapp ."
+            sh "sudo docker build -t scan-test ."
 
             steps {
                 withDockerRegistry([url: "", credentialsId: "dockerbuildbot-index.docker.io"]) {
-                    sh("docker push jmugu/dockerapp")
+                    sh("docker push jmugu/scan-test")
                 }
             }
         }
