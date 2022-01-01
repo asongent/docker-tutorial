@@ -19,13 +19,4 @@ pipeline {
             }
         }
     }
-#}
-##### Dadded Steps
-       stage('docker scan') {
-
-			steps {
-				sh 'docker scan jmugu/scan-test:latest'
-			}
-		}
-	}
 }
