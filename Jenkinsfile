@@ -50,4 +50,3 @@ pipeline{
 			sh 'docker scan jmugu/scan-test'
 		}
 	}
-}
