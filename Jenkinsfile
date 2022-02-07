@@ -1,26 +1,34 @@
 pipeline {
-    options {
-        timeout(time: 1, unit: 'HOURS')
-    }
-    agent {
-        label 'ubuntu-1804 && amd64 && docker'
-    }
-    stages {
-        stage('build and push') {
-            when {
-                branch 'main'
-            }
-            sh "docker build -t jmugu/scan-test:latest ."
+    agent any
 
+    stages {
+        stage('Integration') {
             steps {
-                withDockerRegistry([url: "", credentialsId: "dockerbuildbot-index.docker.io"]) {
-                    sh("docker push jmugu/scan-test:latest")
-                }
+                echo 'Integrating code from multiple developers'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building code from SCM'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploy code to test environment'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Release code to stage environment ready for production'
+            }
+        }
+        stage('Release') {
+            steps {
+                echo 'Code ready To deloy to production'
             }
         }
     }
 }
-
 
 
 // pipeline{
