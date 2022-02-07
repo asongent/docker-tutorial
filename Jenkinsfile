@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Integration') {
             steps {
-                sh 'docker build -t docker/getting-started .'
+                echo 'docker build -t docker/getting-started .'
             }
         }
         stage('Build') {
