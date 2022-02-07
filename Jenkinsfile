@@ -5,7 +5,6 @@ pipeline {
         stage('Integration') {
             steps {
                 sh 'docker build -t docker/getting-started .'
-'
             }
         }
         stage('Build') {
