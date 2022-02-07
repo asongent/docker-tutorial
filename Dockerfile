@@ -25,9 +25,9 @@ COPY app/src ./src
 RUN apk add zip && \
     zip -r /app.zip /app
 
-# Dev-ready container - actual files will be mounted in
-FROM base AS dev
-CMD ["mkdocs", "serve", "-a", "0.0.0.0:8000"]
+# # Dev-ready container - actual files will be mounted in
+# FROM base AS dev
+# CMD ["mkdocs", "serve", "-a", "0.0.0.0:8000"]
 
 # Do the actual build of the mkdocs site
 FROM base AS build
