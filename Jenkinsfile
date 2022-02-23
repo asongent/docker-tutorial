@@ -1,36 +1,72 @@
-pipeline {
-    agent any
+node {
+    def app
 
-    stages {
-        stage('Integration') {
-            steps {
-                echo 'docker build -t docker/getting-started .'
-            }
-        }
-        stage('Build') {
-            steps {
-                echo 'Building code from SCM'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploy code to test environment'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Release code to stage environment ready for production'
-            }
-        }
-        stage('Release') {
-            steps {
-                echo 'Code ready To deloy to production'
-            }
+    stage('Clone repository') {
+      
+
+        checkout scm
+    }
+
+    stage('Build image') {
+  
+       app = docker.build("jmugu/test")
+    }
+
+    stage('Test image') {
+  
+
+        app.inside {
+            sh 'echo "Tests passed"'
         }
     }
+
+    stage('Push image') {
+        
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+            app.push("${env.BUILD_NUMBER}")
+        }
+    }
+    
+    stage('Trigger ManifestUpdate') {
+                echo "triggering updatemanifestjob"
+                build job: 'updatemanifest', parameters: [string(name: 'DOCKERTAG', value: env.BUILD_NUMBER)]
+        }
 }
 
+// Original pipeline starts here and end on line 69
+// pipeline {
+//     agent any
 
+//     stages {
+//         stage('Integration') {
+//             steps {
+//                 echo 'docker build -t docker/getting-started .'
+//             }
+//         }
+//         stage('Build') {
+//             steps {
+//                 echo 'Building code from SCM'
+//             }
+//         }
+//         stage('Deploy') {
+//             steps {
+//                 echo 'Deploy code to test environment'
+//             }
+//         }
+//         stage('Test') {
+//             steps {
+//                 echo 'Release code to stage environment ready for production'
+//             }
+//         }
+//         stage('Release') {
+//             steps {
+//                 echo 'Code ready To deloy to production'
+//             }
+//         }
+//     }
+// }
+
+//END
 // pipeline{
 
 // 	agent any
