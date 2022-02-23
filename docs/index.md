@@ -1,2 +1,2 @@
-redirect: /tutorial/
+redirect: /Nwangong/
 
