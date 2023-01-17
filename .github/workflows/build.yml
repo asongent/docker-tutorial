@@ -30,7 +30,7 @@
             push: true
             name: 'MINOR'
             value: $((${{ secrets.MINOR }}+1))
-            tags:  ${{ secrets.REGISTRY }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
+            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
             
 
 
