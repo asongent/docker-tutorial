@@ -6,9 +6,6 @@ on:
       - main
     tags:
       - "v*"
-  pull_request:
-    branches:
-      - 'main'
 
 jobs:
   deploy-docker-hello-world:
@@ -51,6 +48,7 @@ jobs:
           push: ${{ github.ref_type == 'tag' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          targets: build
 
 
 
