@@ -1,47 +1,81 @@
-name: Deploy My Image to My Private Reg
+name: Docker Image CI
 
 on:
   push:
-    branches:
-      - main
-    tags:
-      - "v*-tracy"
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  deploy-docker-hello-world:
+  build:
     runs-on: ubuntu-latest
+    steps:    
+    - uses: actions/checkout@v2
+    -
+      name: Build the Docker image
+      run: docker build .  --tag ${{ secrets.REGISTRY }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
+    -
+      name: Login to DockerHub
+      uses: docker/login-action@v1 
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    -
+      name: Push to DockerHub
+      run: docker push ${{ secrets.REGISTRY }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
+    -
+      name: Update Minor version
+      uses: hmanzur/actions-set-secret@v2.0.0
+      with:
+        name: 'MINOR'
+        value: $((${{ secrets.MINOR }}+1))
+        repository: ${{ secrets.REGISTRY }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}
+        token: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    steps:
-      - uses: actions/checkout@v2
+# name: Deploy My Image to My Private Reg
 
-      - name: Docker meta
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: ${{ secrets.REGISTRY }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}
-          flavor: latest=true
-          tags: |
-            type=ref,event=tag
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
+# on:
+#   push:
+#     branches:
+#       - main
+#     tags:
+#       - "v*-tracy"
 
-      - name: Login to image repository
-        if: github.ref_type == 'tag'
-        uses: docker/login-action@v2
-        with:
-          registry: ${{ secrets.REGISTRY }}
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+# jobs:
+#   deploy-docker-hello-world:
+#     runs-on: ubuntu-latest
 
-      - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          file: ./Dockerfile
-          push: ${{ github.ref_type == 'tag' }} # ${{ secrets.REGISTRY }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+#     steps:
+#       - uses: actions/checkout@v2
+
+#       - name: Docker meta
+#         id: meta
+#         uses: docker/metadata-action@v4
+#         with:
+#           images: ${{ secrets.REGISTRY }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}
+#           flavor: latest=true
+#           tags: |
+#             type=ref,event=tag
+#             type=ref,event=pr
+#             type=semver,pattern={{version}}
+#             type=semver,pattern={{major}}.{{minor}}
+
+#       - name: Login to image repository
+#         if: github.ref_type == 'tag'
+#         uses: docker/login-action@v2
+#         with:
+#           registry: ${{ secrets.REGISTRY }}
+#           username: ${{ secrets.DOCKER_HUB_USERNAME }}
+#           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+#       - name: Build and push
+#         uses: docker/build-push-action@v3
+#         with:
+#           context: .
+#           file: ./Dockerfile
+#           push: ${{ github.ref_type == 'tag' }} # ${{ secrets.REGISTRY }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}
+#           tags: ${{ steps.meta.outputs.tags }}
+#           labels: ${{ steps.meta.outputs.labels }}
       
 
 
