@@ -28,7 +28,7 @@ jobs:
       uses: hmanzur/actions-set-secret@v2.0.0
       with:
         name: 'MINOR'
-        lables: $((${{ secrets.MINOR }}+1))
+        labels: $((${{ secrets.MINOR }}+1))
         repository: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.REGISTRY }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}
         token: ${{ secrets.DOCKERHUB_TOKEN }}
 
