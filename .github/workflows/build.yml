@@ -6,12 +6,12 @@ name: Deploy My Image to My Private Reg
 on:
   push:
     branches:
-      - main
+      - master
     tags:
       - "v*-tracy"
   pull_request:
     branches:
-      - 'main'
+      - 'master'
 
 jobs:
   deploy-docker-hello-world:
