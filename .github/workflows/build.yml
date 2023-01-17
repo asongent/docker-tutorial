@@ -32,6 +32,9 @@ jobs:
         repository: ${{ secrets.REGISTRY }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}
         token: ${{ secrets.DOCKERHUB_TOKEN }}
 
+
+
+#####Mini
 # name: Deploy My Image to My Private Reg
 
 # on:
