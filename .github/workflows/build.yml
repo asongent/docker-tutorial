@@ -23,7 +23,6 @@ jobs:
           tags: |
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
-            type=sha
             
 #           tags: |
 #             type=ref,event=branch
