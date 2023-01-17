@@ -5,10 +5,10 @@ on:
     branches:
       - main
     tags:
-      - "v*-app"
-  pull_request:
-    branches:
-      - 'main'
+      - "v*app"
+#   pull_request:
+#     branches:
+#       - 'main'
 
 jobs:
   deploy-docker-hello-world:
