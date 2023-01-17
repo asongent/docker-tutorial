@@ -6,7 +6,7 @@ name: Deploy My Image to My Private Reg
 on:
   push:
     branches:
-      - master
+      - main
     tags:
       - "v*-tracy"
   pull_request:
