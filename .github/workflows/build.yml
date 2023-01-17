@@ -48,7 +48,7 @@ jobs:
           push: ${{ secrets.REGISTRY }}/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME  == 'tag'}} 
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          targets: build
+      
 
 
 
