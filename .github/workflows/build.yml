@@ -51,9 +51,9 @@ jobs:
 
         - name: Sign the published Docker image
           run: |
-             cosign sign --key ${{ secrets.COSIGN_PRIVATE_KEY }} ${TAGS}
+             cosign sign --key ${{ secrets.COSIGN_PRIVATE_KEY }} ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
           env:
-            TAGS: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
+           
             COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
             COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
           
