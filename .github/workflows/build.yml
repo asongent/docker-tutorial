@@ -22,7 +22,8 @@ jobs:
         - 
          name: Build an image from Dockerfile
          run: |
-            docker build  -t  ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }} .
+            docker build -t docker.io/jmugu/my-app:${{ github.sha }} .
+            
    
         - 
           name: Run Trivy vulnerability scanner
@@ -37,7 +38,7 @@ jobs:
         # -
         #   name: Set up Docker Buildx
         #   uses: docker/setup-buildx-action@v1
-      
+       # # docker build  -t  ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }} .
         # -
         #   name: Build and push
         #   uses: docker/build-push-action@v2
