@@ -22,7 +22,7 @@ jobs:
         - 
          name: Build an image from Dockerfile
          run: |
-            docker build -t . ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }} 
+            docker build . -t  ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }} 
    
         - 
           name: Run Trivy vulnerability scanner
