@@ -54,8 +54,8 @@ jobs:
              cosign sign --key env://COSIGN_PRIVATE_KEY ${TAGS}
           env:
             TAGS: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
-            COSIGN_PRIVATE_KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
-            COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
+            COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+            COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
           
 
         #   name: Set up Docker Buildx
