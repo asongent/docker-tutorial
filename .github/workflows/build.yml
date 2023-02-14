@@ -46,7 +46,7 @@ jobs:
         - name: Sign the published Docker image
           env:
             COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
-          run: cosign sign --key ${{ secrets.COSIGN_PUBLIC_KEY }}  ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }} 
+          run: cosign sign ${{ secrets.COSIGN_PUBLIC_KEY }}  ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }} 
 
 
         #   name: Set up Docker Buildx
