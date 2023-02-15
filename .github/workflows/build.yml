@@ -49,11 +49,16 @@ jobs:
         - name: Set up QEMU
           uses: docker/setup-qemu-action@v1
 
+        - name: Write signing key to disk
+          run: 'echo "$KEY" > cosign.key'
+          shell: bash
+          env:
+            KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+
         - name: Sign the published Docker image
           run: |
-             cosign sign --key ${{ secrets.COSIGN_PRIVATE_KEY }}.key ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
+             cosign sign --key cosign.key ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
           env:
-           
             COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
             COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
           
