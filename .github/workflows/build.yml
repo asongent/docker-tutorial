@@ -56,11 +56,14 @@ jobs:
             KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
 
         - name: Sign the published Docker image
+          
+          run: |
+            export ${{ secrets.COSIGN_PRIVATE_KEY }}
+            cosign sign --key ${{ secrets.COSIGN_PRIVATE_KEY }} ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
+          
           env:
             COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
             COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
-          run: |
-            "Hello" | cosign sign --key cosign.key ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
           
           
 
