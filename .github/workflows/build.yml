@@ -28,9 +28,8 @@ jobs:
           with:
             context: .
             file: ./Dockerfile
-            push: false
             tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
-            
+            push: false
    
         - 
           name: Run Trivy vulnerability scanner
@@ -42,6 +41,9 @@ jobs:
             ignore-unfixed: true
             vuln-type: 'os,library'
             severity: 'CRITICAL,HIGH'
+        - name: Publish Docker Image
+          run: |
+             docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
 
         - name: Install Cosign
           uses: sigstore/cosign-installer@main
@@ -58,7 +60,7 @@ jobs:
         - name: Sign the published Docker image
           
           run: |
-            export ${{ secrets.COSIGN_PRIVATE_KEY }}
+            export COSIGN_PASSWORD=${{ secrets.COSIGN_PASSWORD }}
             cosign sign --key ${{ secrets.COSIGN_PRIVATE_KEY }} ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
           
           env:
