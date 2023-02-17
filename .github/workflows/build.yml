@@ -7,7 +7,7 @@ on:
 
 jobs:
     build:
-      name: tracy-ci
+      name: tracy-honor-ci  
       runs-on: ubuntu-22.04
 
       steps:
@@ -42,7 +42,8 @@ jobs:
             severity: 'CRITICAL,HIGH'
         - name: Publish Docker Image
           run: |
-             docker push '${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}'
+             export TAGS=${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
+             docker push $TAGS
 
 
 
