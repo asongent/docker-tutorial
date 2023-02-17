@@ -7,10 +7,8 @@ on:
 
 jobs:
     build:
+      name: tracy-ci
       runs-on: ubuntu-22.04
-      permissions:
-        contents: read
-        packages: write
 
       steps:
         -
@@ -44,7 +42,9 @@ jobs:
             severity: 'CRITICAL,HIGH'
         - name: Publish Docker Image
           run: |
-             docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
+             docker push '${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}'
+
+
 
         - name: Install Cosign
           uses: sigstore/cosign-installer@main
