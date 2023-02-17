@@ -43,7 +43,7 @@ jobs:
             severity: 'CRITICAL,HIGH'
         - name: Publish Docker Image
           run: |
-             docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
+             docker push docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
 
         - name: Install Cosign
           uses: sigstore/cosign-installer@main
@@ -61,11 +61,11 @@ jobs:
           
           run: |
             export COSIGN_PASSWORD=${{ secrets.COSIGN_PASSWORD }}
-            cosign sign --key ${{ secrets.COSIGN_PRIVATE_KEY }} ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
+            cosign sign --key env://${{ secrets.COSIGN_PRIVATE_KEY }} ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
           
           env:
             COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
-            COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+            #COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
           
           
 
