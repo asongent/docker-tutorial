@@ -29,7 +29,7 @@ jobs:
             tag_prefix: 'v'
             major_pattern: 'feat:'
             minor_pattern: 'fix:'
-            short: 'chore:'
+            short_tags: 'chore:'
             format: "v${major}.${minor}.${patch}-dev${increment}"
         # - 
         #   name: linting
