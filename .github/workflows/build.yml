@@ -9,32 +9,47 @@ jobs:
     build:
       name: tracy-honor-ci  
       runs-on: ubuntu-22.04
+      env: 
+        env_var: ${{ secrets.APP_NAME }}
+        COSIGN_PRIVATE_KEY: ${{ secrets. COSIGN_PRIVATE_KEY}}
+        COSIGN_PUBLIC_KEY: ${{ secrets. COSIGN_PUBLIC_KEY}}
+
 
       steps:
-        -
-          name: Checkout 
+        
+        - name: Checkout 
           uses: actions/checkout@v2
-        -
-          name: Login to Docker Hub
+          with:
+            fetch-depth: 0
+        # - 
+        #   name: linting
+        #   uses: hadolint@hadolint@v3.1.0
+        #   with: 
+        #     dockerfile: .
+        #     config: hadolint-config.yaml
+        #     ignore:  'DL4006,Dl3008'
+       
+        
+        - name: Login to Docker Hub
           uses: docker/login-action@v1
           with:
             registry: ${{ secrets.REGISTRY }}
             username: ${{ secrets.DOCKER_HUB_USERNAME }}
             password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-        - 
-          name: Build Image
+        
+        - name: Build Image
           uses: docker/build-push-action@v2
           with:
             context: .
             file: ./Dockerfile
-            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
+            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.env_var }}:${{steps.versioning.output.version}}
             push: false
    
-        - 
-          name: Run Trivy vulnerability scanner
+        
+        - name: Run Trivy vulnerability scanner
           uses: aquasecurity/trivy-action@master
           with:
-            image-ref: '${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}'
+            image-ref: '${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.env_var }}:${{steps.versioning.output.version}}'
             format: 'table'
             exit-code: '1'
             ignore-unfixed: true
@@ -42,32 +57,34 @@ jobs:
             severity: 'CRITICAL,HIGH'
 
         - name: Publish Docker Image
-          run: docker push ${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
-             
-
+          run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.env_var }}:${{steps.versioning.output.version}}
 
 
         - name: Install Cosign
           uses: sigstore/cosign-installer@main
 
-        # - name: Set up QEMU
-        #   uses: docker/setup-qemu-action@v1
-
-        - name: Write signing key to disk
-          run: 'echo "$KEY" > cosign.key'
-          shell: bash
-          env:
-            KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
-
-        - name: Sign the published Docker image
-          
+        - name: sign image
           run: |
             export COSIGN_PASSWORD=${{ secrets.COSIGN_PASSWORD }}
-            cosign sign --key env://${{ secrets.COSIGN_PRIVATE_KEY }} ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ secrets.MAJOR }}.${{ secrets.MINOR }}
-          
-          env:
-            COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
-            #COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+            export TAGS=${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.env_var }}:${{steps.versioning.output.version}}
+            cosign sign --key env://COSIGN_PUBLIC_KEY ${TAGS}
+
+        - name: verify signature
+          run: |
+            export COSIGN_PASSWORD=${{ secrets.COSIGN_PASSWORD }}
+            export TAGS=export TAGS=${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.env_var }}:${{steps.versioning.output.version}}
+            cosign verify --key env://COSIGN_PUBLIC_KEY ${TAGS}
+
+        - name: semver
+          id: versioning
+          uses: PaulHatch/semanticversion@v4.0.2
+          with:
+            branch: main
+            tax_prefix: 'v'
+            major_prefix: 'feat:'
+            minor_prefix: 'fix:'
+            short: 'chore:'
+            format: "v${major}.${minor}.${patch}-dev${increament}"
           
           
 
