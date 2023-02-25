@@ -21,6 +21,16 @@ jobs:
           uses: actions/checkout@v2
           with:
             fetch-depth: 0
+        - name: semver
+          id: versioning
+          uses: PaulHatch/semantic-version@v4.0.2
+          with:
+            branch: main
+            tax_prefix: 'v'
+            major_prefix: 'feat:'
+            minor_prefix: 'fix:'
+            short: 'chore:'
+            format: "v${major}.${minor}.${patch}-dev${increment}"
         # - 
         #   name: linting
         #   uses: hadolint@hadolint@v3.1.0
@@ -75,16 +85,7 @@ jobs:
             export TAGS=export TAGS=${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.env_var }}:${{steps.versioning.output.version}}
             cosign verify --key env://COSIGN_PUBLIC_KEY ${TAGS}
 
-        - name: semver
-          id: versioning
-          uses: PaulHatch/semantic-version@v4.0.2
-          with:
-            branch: main
-            tax_prefix: 'v'
-            major_prefix: 'feat:'
-            minor_prefix: 'fix:'
-            short: 'chore:'
-            format: "v${major}.${minor}.${patch}-dev${increament}"
+        
           
           
 
