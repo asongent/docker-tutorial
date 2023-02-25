@@ -45,14 +45,14 @@ jobs:
           with:
             push: false
             context: .
-            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ steps.versioning.outputs.version }}
+            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.env_var }}:${{ steps.versioning.outputs.version }}
             
    
         
         - name: Run Trivy vulnerability scanner
           uses: aquasecurity/trivy-action@master
           with:
-            image-ref: '${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ steps.versioning.outputs.version }}'
+            image-ref: '${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.env_var }}:${{ steps.versioning.outputs.version }}'
             format: 'table'
             exit-code: '1'
             ignore-unfixed: true
