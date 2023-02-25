@@ -11,8 +11,8 @@ jobs:
       runs-on: ubuntu-22.04
       env: 
         env_var: ${{ secrets.APP_NAME }}
-        COSIGN_PRIVATE_KEY: ${{ secrets. COSIGN_PRIVATE_KEY}}
-        COSIGN_PUBLIC_KEY: ${{ secrets. COSIGN_PUBLIC_KEY}}
+        COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+        COSIGN_PUBLIC_KEY: ${{ secrets.COSIGN_PUBLIC_KEY }}
 
 
       steps:
@@ -44,14 +44,14 @@ jobs:
           uses: docker/build-push-action@v2
           with:
             context: .
-            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.env_var }}:${{ steps.versioning.output.version }}
+            tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ steps.versioning.output.version }}
             push: false
    
         
         - name: Run Trivy vulnerability scanner
           uses: aquasecurity/trivy-action@master
           with:
-            image-ref: '${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.env_var }}:${{ steps.versioning.output.version }}'
+            image-ref: '${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ steps.versioning.output.version }}'
             format: 'table'
             exit-code: '1'
             ignore-unfixed: true
@@ -66,7 +66,7 @@ jobs:
             password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
         - name: Publish Docker Image
-          run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.env_var }}:${{steps.versioning.output.version}}
+          run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{steps.versioning.output.version}}
 
 
         - name: Install Cosign
