@@ -68,7 +68,8 @@ jobs:
 
         - name: Publish Docker Image
           run: |
-            docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ steps.versioning.outputs.version }}
+            export TAGS=${{ secrets.DOCKER_HUB_USERNAME }}/${{ env.env_var }}:${{ steps.versioning.outputs.version }}
+            docker push ${TAGS}
 
 
         - name: Install Cosign
