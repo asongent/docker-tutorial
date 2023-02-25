@@ -77,7 +77,7 @@ jobs:
 
         - name: semver
           id: versioning
-          uses: PaulHatch/semanticversion@v4.0.2
+          uses: PaulHatch/semantic-version@v4.0.2
           with:
             branch: main
             tax_prefix: 'v'
