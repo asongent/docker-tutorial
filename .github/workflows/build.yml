@@ -26,9 +26,9 @@ jobs:
           uses: PaulHatch/semantic-version@v4.0.2
           with:
             branch: main
-            tax_prefix: 'v'
-            major_prefix: 'feat:'
-            minor_prefix: 'fix:'
+            tag_prefix: 'v'
+            major_pattern: 'feat:'
+            minor_pattern: 'fix:'
             short: 'chore:'
             format: "v${major}.${minor}.${patch}-dev${increment}"
         # - 
