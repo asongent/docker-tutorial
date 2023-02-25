@@ -67,7 +67,8 @@ jobs:
             password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
         - name: Publish Docker Image
-          run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{steps.versioning.outputs.version}}
+          run: |
+            docker push ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.APP_NAME }}:${{ steps.versioning.outputs.version }}
 
 
         - name: Install Cosign
